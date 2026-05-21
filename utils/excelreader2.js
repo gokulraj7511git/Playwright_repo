@@ -1,0 +1,13 @@
+const XLSX = require('xlsx') // xlsx is a library used to read and write excel files in node.js. It provides a simple API to read and write excel files in various formats such as .xlsx, .xls, .csv, etc. It also provides various methods to manipulate the data in the excel files such as adding, deleting, and updating cells, rows, and columns. It also provides methods to format the cells and to create charts and pivot tables. It is a very useful library for working with excel files in node.js applications.
+function getCellData(row,column)    // getCellData is a function that takes row and column as parameters and returns the value of the cell at the specified row and column in the excel sheet. It uses the xlsx library to read the excel file and fetch the data from the specified cell. It also handles the case when there is no data in the cell and returns undefined in that case.
+{ 
+ const workbook = XLSX.readFile('TestData/Applicationdata.xlsx') // readFile is a method of the xlsx library that is used to read an excel file and returns a workbook object that contains the data of the excel file. It takes the path of the excel file as a parameter and reads the file from that path. In this case, it reads the excel file from the 'TestData' folder and the file name is 'Applicationdata.xlsx'.
+ const sheet=workbook.Sheets['loginpage']  // Sheets is a property of the workbook object that contains all the sheets in the excel file. It is an object where the keys are the names of the sheets and the values are the sheet objects. In this case, it fetches the sheet object for the sheet named 'loginpage'.
+ const cellvalue=XLSX.utils.encode_cell({   // encode_cell used to fetch row based and column based data fetch.
+    r:row-1, // r is used to specify the row number and it is zero-based index, so we need to subtract 1 from the row number to get the correct row index.
+    c:column-1 // c is used to specify the column number and it is zero-based index, so we need to subtract 1 from the column number to get the correct column index.
+ })
+ const cell=sheet[cellvalue]    // cell is used to fetch the data from the cell value and if there is no data in the cell then it will return undefined.
+ return cell ? cell.v : undefined // cell.v is used to fetch the value of the cell.
+}
+module.exports={getCellData} // module.exports is used to export the getCellData function so that it can be used in other files. It is a common practice to export functions and variables from a module so that they can be reused in other parts of the application. In this case, it exports the getCellData function so that it can be used in the test files to fetch data from the excel sheet.
