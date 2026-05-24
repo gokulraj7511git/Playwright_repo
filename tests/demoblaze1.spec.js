@@ -11,7 +11,7 @@ test ('Demo Blazer Test', async ({page})=> {
          await signupbutton.click()
 
 page.on('dialog', async dialog => {
-    expect(dialog.message()).toBe('Sign up successful.')
+    expect(dialog.message()).toBe('Sign up successfull.')
     await dialog.accept()
   })
 
